@@ -1,8 +1,8 @@
-services:
+version: "3.8"
 
+services:
   backend:
     build: ./backend
-
     restart: always
     ports:
     - 80:80
