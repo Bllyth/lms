@@ -38,8 +38,6 @@ services:
       - traefik.http.routers.app-http.rule=Host('blyth.tech')
       # Use Traefik public network
       - traefik.docker.network=traefik-public
-    networks:
-      - traefik-public
 
 
 networks:
