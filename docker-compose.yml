@@ -40,7 +40,6 @@ services:
       - traefik.docker.network=traefik-public
     networks:
       - traefik-public
-      -
 
 
 networks:
