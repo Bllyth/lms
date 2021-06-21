@@ -20,10 +20,10 @@ services:
       - --accesslog
       # Enable Traefik log, for configurations and errors
       - --log
-    networks:
-      # Use public network created to be shared between Traefik and
-      # any other service that need to be publicly available via HTTPS
-      - traefik-public
+#    networks:
+#      # Use public network created to be shared between Traefik and
+#      # any other service that need to be publicly available via HTTPS
+#      - traefik-public
 
   backend:
     build: ./backend
