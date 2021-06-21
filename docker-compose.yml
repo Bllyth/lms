@@ -39,6 +39,11 @@ services:
       # Use Traefik public network
       - traefik.docker.network=traefik-public
 
+    networks:
+      # Use public network created to be shared between Traefik and
+      # any other service that need to be publicly available via HTTPS
+      - traefik-public
+
 
 networks:
   traefik-public:
