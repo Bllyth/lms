@@ -1,29 +1,6 @@
 version: "3.3"
 
 services:
-  traefik:
-    image: traefik:v2.3
-    ports:
-      - 80:80
-    restart: always
-    volumes:
-      #Add Docker as a mounted volume, so Traefik ca read labels of other services
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    command:
-      # Enable Docker in Traefik, so that it reads labels from Dovker services
-      - --providers.docker
-      # Do not expose Docker service, only the ones explicitly exposed
-      - --providers.docker.exposedbydefault=false
-      # Create an entrypoint "http" listening on port 80
-      - --entrypoints.http.address=:80
-      # Enable access log, with http requests
-      - --accesslog
-      # Enable Traefik log, for configurations and errors
-      - --log
-    networks:
-      # Use public network created to be shared between Traefik and
-      # any other service that need to be publicly available via HTTPS
-      - traefik-public
 
   backend:
     build: ./backend
@@ -35,7 +12,7 @@ services:
       - traefik.http.services.app.loadbalancer.server.port=80
       # Make traefik use this domain in HTTP
       - traefik.http.routers.app-http.entrypoints=http
-#      - traefik.http.routers.app-http.rule=Host(`blyth.tech`)
+      - traefik.http.routers.app-http.rule=Host(`blyth.tech`)
       # Use Traefik public network
       - traefik.docker.network=traefik-public
 
