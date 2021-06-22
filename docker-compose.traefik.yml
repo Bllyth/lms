@@ -62,7 +62,7 @@ services:
       # Enable Traefik log, for configurations and errors
       - --log
       # Enable the Dashboard and API
-      - --api
+#      - --api
     networks:
       # Use public network created to be shared between Traefik and
       # any other service that need to be publicly available via HTTPS
