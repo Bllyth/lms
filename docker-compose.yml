@@ -1,6 +1,8 @@
 version: "3.3"
 
 services:
+  proxy:
+
 
   backend:
     build: ./backend
