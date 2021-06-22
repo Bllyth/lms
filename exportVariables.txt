@@ -1,0 +1,8 @@
+export USERNAME=admin
+export PASSWORD=password
+
+# Generate password hash
+openssl passwd --apr1 $PASSWORD
+
+# export hashed password
+export HASHED_PASSWORD=$(openssl passwd -apr1 $PASSWORD)
