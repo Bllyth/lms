@@ -76,10 +76,10 @@ services:
       - .env
     environment:
       - DATA=/var/lib/postgres/data/pgdata
-    deploy:
-      placement:
-        constraints:
-          - node.app.app-db-data == true
+#    deploy:
+#      placement:
+#        constraints:
+#          - node.app.app-db-data == true
 
   backend:
     build: ./backend
