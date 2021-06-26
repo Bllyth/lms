@@ -5,8 +5,8 @@ services:
     restart: always
     env_file:
       - .env
-    depends_on:
-      - db
+#    depends_on:
+#      - db
     labels:
       # Enable Traefik for this specicif "backend" service
       - traefik.enable=true
