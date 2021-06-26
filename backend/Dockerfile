@@ -11,7 +11,7 @@ FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8
 # Copy poetry.lock* in case it doesn't exist in the repo
 #COPY ./pyproject.toml ./poetry.lock* /app/
 #COPY ./app/pyproject.toml ./app/poetry.lock* /app/
-COPY . /app
+COPY . .
 
 RUN pip install -r requirements.txt
 
