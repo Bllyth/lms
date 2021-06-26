@@ -1,6 +1,28 @@
-version: "3.3"
-
 services:
+  web:
+    build: .
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; uvicorn app.main:app --host 0.0.0.0'
+    volumes:
+      - .:/app
+    expose:  # new
+      - 8000
+    environment:
+      - DATABASE_URL=postgresql://fastapi_traefik:fastapi_traefik@db:5432/fastapi_traefik
+    depends_on:
+      - db
+    labels: # new
+      - "traefik.enable=true"
+      - "traefik.http.routers.fastapi.rule=Host(`fastapi.localhost`)"
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_USER=fastapi_traefik
+      - POSTGRES_PASSWORD=fastapi_traefik
+      - POSTGRES_DB=fastapi_traefik
   traefik:
     image: traefik:v2.3
     ports:
@@ -34,9 +56,9 @@ services:
       - traefik.http.routers.traefik-dashboard-http.middlewares=https-redirect
       # admin-auth middleware with HTTP Basic auth
       # Using the environment variables USERNAME and HASHED_PASSWORD
-#      - traefik.http.middlewares.admin-auth.basicauth.users=${USERNAME?Variable not set}:${HASHED_PASSWORD?Variable not set}
-#      # Enable HTTP Basic auth, using the middleware created above
-#      - traefik.http.routers.traefik-dashboard-https.middlewares=admin-auth
+    #      - traefik.http.middlewares.admin-auth.basicauth.users=${USERNAME?Variable not set}:${HASHED_PASSWORD?Variable not set}
+    #      # Enable HTTP Basic auth, using the middleware created above
+    #      - traefik.http.routers.traefik-dashboard-https.middlewares=admin-auth
     volumes:
       # Add Docker as a mounted volume, so Traefik ca read labels of other services
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -68,57 +90,9 @@ services:
       # any other service that need to be publicly available via HTTPS
       - traefik-public
 
-  db:
-    image: postgres:13
-    volumes:
-      - app-db-data:/varlib/postgresql/data/pgdata
-    env_file:
-      - .env
-    environment:
-      - DATA=/var/lib/postgres/data/pgdata
-#    deploy:
-#      placement:
-#        constraints:
-#          - node.app.app-db-data == true
-
-  backend:
-    build: ./backend
-    restart: always
-    env_file:
-      - .env
-    depends_on:
-      - db
-    labels:
-      # Enable Traefik for this specicif "backend" service
-      - traefik.enable=true
-      # Define the port inside of Docker service to use
-      - traefik.http.services.app.loadbalancer.server.port=80
-      # Make traefik use this domain in HTTP
-      - traefik.http.routers.app-http.entrypoints=http
-      - traefik.http.routers.app-http.rule=Host(`blyth.tech`)
-      # Use Traefik public network
-      - traefik.docker.network=traefik-public
-      # Make traefik use this domain in HTTPS
-      - traefik.http.routers.app-https.entrypoints=https
-      - traefik.http.routers.app-https.rule=Host(`blyth.tech`)
-      - traefik.http.routers.app-https.tls=true
-      # Use le "le" (Let's Encrypt) resolver
-      - traefik.http.routers.app-https.tls.certresolver=le
-      # https-redirect middleware to redirect HTTP to HTTPS
-      - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
-      - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
-      # Middleware to redirect HTTP to HTTPS
-      - traefik.http.routers.app-http.middlewares=https-redirect
-#      - traefik.http.routers.app-https.middleware=admin-auth
-
-    networks:
-      # Use public network created to be shared between Traefik and
-      # any other service that need to be publicly available via HTTPS
-      - traefik-public
-
 volumes:
+  postgres_data:
   traefik-public-certificates:
-  app-db-data:
 
 networks:
   traefik-public:
