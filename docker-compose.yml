@@ -189,26 +189,10 @@ services:
   #        - traefik.http.routers.${STACK_NAME?Variable not set}-frontend-http.rule=PathPrefix(`/`)
   #        - traefik.http.services.${STACK_NAME?Variable not set}-frontend.loadbalancer.server.port=80
 
-  volumes:
-    app-db-data:
+volumes:
+  app-db-data:
 
-  networks:
-    traefik-public:
-      # Allow setting it to false for testing
-      external: ${TRAEFIK_PUBLIC_NETWORK_IS_EXTERNAL-true}
-
-      © 2021 GitHub, Inc.
-      Terms
-      Privacy
-      Security
-      Status
-      Docs
-
-      Contact GitHub
-      Pricing
-      API
-      Training
-      Blog
-      About
-
-    Loading complete
+networks:
+  traefik-public:
+    # Allow setting it to false for testing
+    external: ${TRAEFIK_PUBLIC_NETWORK_IS_EXTERNAL-true}
