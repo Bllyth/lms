@@ -1,6 +1,6 @@
 FROM python:3.9
 
-WORKDIR /app/
+WORKDIR /
 
 # Install Poetry
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | POETRY_HOME=/opt/poetry python && \
@@ -9,7 +9,7 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-
     poetry config virtualenvs.create false
 
 # Copy poetry.lock* in case it doesn't exist in the repo
-COPY ./app/pyproject.toml ./app/poetry.lock* /app/
+COPY ./pyproject.toml ./poetry.lock* /
 
 # Allow installing dev dependencies to run tests
 ARG INSTALL_DEV=false
@@ -23,10 +23,10 @@ RUN bash -c "if [ $INSTALL_JUPYTER == 'true' ] ; then pip install jupyterlab ; f
 
 ENV C_FORCE_ROOT=1
 
-COPY ./app /app
+COPY . .
 WORKDIR /app
 
-ENV PYTHONPATH=/app
+ENV PYTHONPATH=/
 
 COPY ./app/worker-start.sh /worker-start.sh
 
