@@ -4,9 +4,9 @@ from pydantic import BaseSettings, Field, PostgresDsn, validator
 
 
 class Settings(BaseSettings):
-    # db_url: str = Field(..., env='DATABASE_URL')
+    db_url: str = Field(..., env='DATABASE_URL')
 
-    db_url: PostgresDsn = 'postgres:postgres@db:5432/lms-app'
+    # db_url: PostgresDsn = 'postgres:postgres@db:5432/lms-app'
 
     # POSTGRES_SERVER: str
     # POSTGRES_USER: str
