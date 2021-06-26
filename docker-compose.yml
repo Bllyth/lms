@@ -7,6 +7,19 @@ services:
 #      dockerfile: docker-compose.traefik.yml
 #    restart: always
 
+  db:
+    image: postgres:13
+    volumes:
+      - app-db-data:/varlib/postgresql/data/pgdata
+    env_file:
+      - .env
+    environment:
+      - DATA=/var/lib/postgres/data/pgdata
+    deploy:
+      placement:
+        constraints:
+          - node.app.app-db-data == true
+
   backend:
     build: ./backend
     restart: always
@@ -41,22 +54,6 @@ services:
       # Use public network created to be shared between Traefik and
       # any other service that need to be publicly available via HTTPS
       - traefik-public
-
-
-  db:
-    image: postgres:13
-    volumes:
-      - app-db-data:/varlib/postgresql/data/pgdata
-    env_file:
-      - .env
-    environment:
-      - DATA=/var/lib/postgres/data/pgdata
-    deploy:
-      placement:
-        constraints:
-          - node.app.app-db-data == true
-
-
 
 volumes:
   app-db-data:
