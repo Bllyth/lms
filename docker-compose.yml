@@ -2,7 +2,10 @@ version: "3.3"
 
 services:
   proxy:
-
+    build:
+      context: .
+      dockerfile: docker-compose.traefik.yml
+    restart: always
 
   backend:
     build: ./backend
