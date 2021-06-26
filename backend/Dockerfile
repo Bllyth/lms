@@ -10,7 +10,7 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-
 
 # Copy poetry.lock* in case it doesn't exist in the repo
 COPY ./pyproject.toml ./poetry.lock* /
-COPY ./app/pyproject.toml ./app/poetry.lock* /
+#COPY ./pyproject.toml ./poetry.lock* /
 COPY . .
 
 RUN pip install -r requirements.txt
