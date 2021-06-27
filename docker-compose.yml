@@ -71,16 +71,15 @@ services:
       - traefik-public
 
   db:
-    image: postgres:12
+    image: postgres:13-alpine
     volumes:
-      - app-db-data:/var/lib/postgresql/data/pgdata
+      - postgres_data:/var/lib/postgresql/data/
+    expose:
+      - 5432
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=lms-app
-      - PGDATA=/var/lib/postgresql/data/pgdata
-  #      constraints:
-  #        - node.labels.${STACK_NAME?Variable not set}.app-db-data == true
 
   #  pgadmin:
   #    image: dpage/pgadmin4
