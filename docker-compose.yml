@@ -142,7 +142,7 @@ services:
       context: ./backend
       dockerfile: backend.dockerfile
       args:
-        INSTALL_DEV: false
+        INSTALL_DEV: ${INSTALL_DEV-false}
     environment:
       - DATABASE_URL=postgresql://postgres-user:postgres-password@db:5432/lms-app
     depends_on:
