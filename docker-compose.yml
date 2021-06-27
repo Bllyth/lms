@@ -72,6 +72,7 @@ services:
 
   db:
     image: postgres:13-alpine
+    restart: always
     volumes:
       - app-db-data:/var/lib/postgresql/data/
     expose:
