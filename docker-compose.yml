@@ -78,7 +78,6 @@ services:
     expose:
       - 5432
     environment:
-      POSTGRES_HOST_AUTH_METHOD: trust
       - POSTGRES_USER=postgres-user
       - POSTGRES_PASSWORD=postgres-password
       - POSTGRES_DB=lms-app
