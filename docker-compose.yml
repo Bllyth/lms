@@ -80,6 +80,7 @@ services:
       - POSTGRES_USER=postgres-user
       - POSTGRES_PASSWORD=postgres-password
       - POSTGRES_DB=lms-app
+      POSTGRES_HOST_AUTH_METHOD: trust
     networks:
       # Use public network created to be shared between Traefik and
       # any other service that need to be publicly available via HTTPS
