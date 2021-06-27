@@ -215,7 +215,7 @@ volumes:
   # Traefik is always deployed to the same Docker node with the same volume containing
   # the HTTPS Certificates
   traefik-public-certificates:
-#  app-db-data:
+  app-db-data:
 
 networks:
   traefik-public:
