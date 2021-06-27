@@ -138,24 +138,16 @@ services:
   #      - traefik.http.services.${STACK_NAME?Variable not set}-flower.loadbalancer.server.port=5555
 
   backend:
-    image: '${DOCKER_IMAGE_BACKEND?Variable not set}:${TAG-latest}'
-    depends_on:
-      - db
-    environment:
-      - DATABASE_URL=postgresql://postgres-user:postgres-password@db:5432/lms-app
-
-#    env_file:
-#      - .env
-    #    environment:
-    #      - SERVER_NAME=${DOMAIN?Variable not set}
-    #      - SERVER_HOST=https://${DOMAIN?Variable not set}
-    #      # Allow explicit env var override for tests
-    #      - SMTP_HOST=${SMTP_HOST}
     build:
       context: ./backend
       dockerfile: backend.dockerfile
       args:
-        INSTALL_DEV: ${INSTALL_DEV-false}
+        INSTALL_DEV: false
+    environment:
+      - DATABASE_URL=postgresql://postgres-user:postgres-password@db:5432/lms-app
+    depends_on:
+      - db
+
     labels:
       # Enable Traefik for this specific "backend" service
       - traefik.enable=true
