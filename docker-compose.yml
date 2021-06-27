@@ -80,6 +80,10 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=lms-app
+    networks:
+      # Use public network created to be shared between Traefik and
+      # any other service that need to be publicly available via HTTPS
+      - traefik-public
 
   #  pgadmin:
   #    image: dpage/pgadmin4
