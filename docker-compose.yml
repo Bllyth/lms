@@ -71,7 +71,7 @@ services:
       - traefik-public
 
   db:
-    image: postgres:13
+    image: postgres:12
     volumes:
       - app-db-data:/var/lib/postgresql/data/pgdata
     environment:
