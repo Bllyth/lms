@@ -138,10 +138,13 @@ services:
 
   backend:
     image: '${DOCKER_IMAGE_BACKEND?Variable not set}:${TAG-latest}'
-    #    depends_on:
-    #      - db
-    env_file:
-      - .env
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/lms-app
+
+#    env_file:
+#      - .env
     #    environment:
     #      - SERVER_NAME=${DOMAIN?Variable not set}
     #      - SERVER_HOST=https://${DOMAIN?Variable not set}
