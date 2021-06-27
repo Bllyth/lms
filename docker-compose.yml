@@ -77,8 +77,8 @@ services:
     expose:
       - 5432
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres-user
+      - POSTGRES_PASSWORD=postgres-password
       - POSTGRES_DB=lms-app
     networks:
       # Use public network created to be shared between Traefik and
@@ -145,7 +145,7 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/lms-app
+      - DATABASE_URL=postgresql://postgres-user:postgres-password@db:5432/lms-app
 
 #    env_file:
 #      - .env
