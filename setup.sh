@@ -20,6 +20,8 @@ install_docker(){
 
     # Allow current user to run Docker commands
     sudo usermod -aG docker $USER
+    # restart vm
+    sudo reboot
 }
 
 create_directories() {
