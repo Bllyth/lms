@@ -7,7 +7,7 @@ app = FastAPI()
 
 
 @app.on_event("startup")
-async def startup():
+async def startup() -> None:
     if not database.is_connected:
         await database.connect()
     # # create a dummy entry
@@ -15,7 +15,7 @@ async def startup():
 
 
 @app.on_event("shutdown")
-async def shutdown():
+async def shutdown() -> None:
     if database.is_connected:
         await database.disconnect()
 

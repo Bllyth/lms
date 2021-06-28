@@ -4,7 +4,7 @@ import sqlalchemy
 
 from .config import settings
 
-database = databases.Database(settings.db_url)
+database = databases.Database(settings.DB_URL)
 metadata = sqlalchemy.MetaData()
 
 
@@ -13,8 +13,5 @@ class BaseMeta(ormar.ModelMeta):
     database = database
 
 
-
-
-
-engine = sqlalchemy.create_engine(settings.db_url)
+engine = sqlalchemy.create_engine(settings.DB_URL)
 metadata.create_all(engine)
