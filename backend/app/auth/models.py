@@ -6,7 +6,7 @@ from passlib.context import CryptContext
 from pydantic import BaseModel
 
 from ..config import settings
-from ..db import BaseMeta
+from ..base import BaseMeta
 
 pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 
