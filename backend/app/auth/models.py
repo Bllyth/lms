@@ -15,3 +15,4 @@ class User(Model):
     id_no: str = Integer(unique=True)
     phone_no: int = Integer(unique=True, nullable=False)
     active: bool = Boolean(default=True, nullable=False)
+
