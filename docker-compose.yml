@@ -91,7 +91,7 @@ services:
       # Lets encrypt staging environment
       - --certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
       # Create the certificate resolver "le" for Let's Encrypt, uses the environment variable EMAIL
-      - --certificatesresolvers.le.acme.email=blythcorn@gmail.com
+      - --certificatesresolvers.le.acme.email=muchiralc@gmail.com
       # Store the Let's Encrypt certificates in the mounted volume
       - --certificatesresolvers.le.acme.storage=/certificates/acme.json
       # Use the TLS Challenge for Let's Encrypt
