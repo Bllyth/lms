@@ -25,10 +25,10 @@ class User(Model):
         tablename = "users"
 
     id: int = Integer(primary_key=True)
-    name: str = String(nullable=False)
+    name: str = String(max_length=200, nullable=False)
     username: str = String(unique=True, max_length=128, nullable=False)
     email: str = String(max_length=128, unique=True, nullable=False)
-    password: str = String(nullable=False)
+    password: str = String(max_length=128, nullable=False)
     id_no: str = Integer(unique=True)
     phone_no: int = Integer(unique=True, nullable=False)
     active: bool = Boolean(default=True, nullable=False)
