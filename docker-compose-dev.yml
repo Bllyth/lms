@@ -155,8 +155,8 @@ services:
       args:
         INSTALL_DEV: ${INSTALL_DEV-false}
     #    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; uvicorn main:app --host 0.0.0.0'
-    environment:
-      - DATABASE_URL=postgresql://postgres-user:postgres-password@db:5432/lms-app
+    env_file:
+      - .env
     labels:
       # Enable Traefik for this specific "backend" service
       - traefik.enable=true
