@@ -36,15 +36,15 @@ async def root():
     }
 
 
-@app.on_event('startup')
+@app.on_event("startup")
 async def startup():
-    if not database.is_connected():
+    if not database.is_connected:
         await database.connect()
-
+    # create a dummy entry
     await User.objects.get_or_create(email="test@test.com")
 
 
-@app.on_event('shutdown')
+@app.on_event("shutdown")
 async def shutdown():
     if database.is_connected:
         await database.disconnect()
