@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 from app.base import database
-from api import api_router
+from app.api import api_router
 
 app = FastAPI()
 

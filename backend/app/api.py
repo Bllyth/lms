@@ -1,10 +1,10 @@
-from fastapi import FastAPI
+from fastapi import APIRouter
 
-app = FastAPI()
+from .auth.views import auth_router, user_router
 
+api_router = APIRouter()
 
-@app.get('/')
-async def root():
-    return {
-        "message": "Welcome to vercel"
-    }
+# include all routers
+api_router.include_router(auth_router, prefix="/auth", tags=["auth"])
+api_router.include_router(user_router, prefix="/users", tags=["users"])
+
