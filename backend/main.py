@@ -7,9 +7,7 @@ app = FastAPI()
 
 @app.get('/')
 async def root():
-    return {
-        "message": "Welcome to vercel"
-    }
+    return await User.objects.all()
 
 
 @app.on_event("startup")
