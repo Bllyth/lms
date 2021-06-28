@@ -49,12 +49,12 @@ services:
       - traefik.http.services.traefik-dashboard.loadbalancer.server.port=8080
       # Make Traefik use this domain in HTTP
       - traefik.http.routers.traefik-dashboard-http.entrypoints=http
-      - traefik.http.routers.traefik-dashboard-http.rule=Host(`traefik.blyth.tech`)
+      - traefik.http.routers.traefik-dashboard-http.rule=Host(`traefik.enable.rocks`)
       # Use the traefik-public network (declared below)
       - traefik.docker.network=traefik-public
       #      # traefik-https the actual router using HTTPS
       #      - traefik.http.routers.traefik-dashboard-https.entrypoints=https
-      #      - traefik.http.routers.traefik-dashboard-https.rule=Host(`traefik.blyth.tech`)
+      #      - traefik.http.routers.traefik-dashboard-https.rule=Host(`traefik.enable.rocks`)
       #      - traefik.http.routers.traefik-dashboard-https.tls=true
       #      # Use the "le" (Let's Encrypt) resolver created below
       #      - traefik.http.routers.traefik-dashboard-https.tls.certresolver=le
@@ -132,7 +132,7 @@ services:
 #      - traefik.http.services.app.loadbalancer.server.port=80
 #      # Make Traefik use this domain in HTTP
 #      - traefik.http.routers.app-http.entrypoints=http
-#      - traefik.http.routers.app-http.rule=Host(`blyth.tech`)
+#      - traefik.http.routers.app-http.rule=Host(`enable.rocks`)
 #      # Use the traefik-public network (declared below)
 #      - traefik.docker.network=traefik-public
 #    networks:
@@ -157,12 +157,12 @@ services:
       - traefik.http.services.app.loadbalancer.server.port=80
       # Make Traefik use this domain in HTTP
       - traefik.http.routers.app-http.entrypoints=http
-      - traefik.http.routers.app-http.rule=Host(`blyth.tech`)
+      - traefik.http.routers.app-http.rule=Host(`enable.rocks`)
       # Use the traefik-public network (declared below)
       - traefik.docker.network=traefik-public
       # Make Traefik use this domain in HTTPS
       - traefik.http.routers.app-https.entrypoints=https
-      - traefik.http.routers.app-https.rule=Host(`blyth.tech`)
+      - traefik.http.routers.app-https.rule=Host(`enable.rocks`)
       - traefik.http.routers.app-https.tls=true
       # Use the "le" (Let's Encrypt) resolver
       - traefik.http.routers.app-https.tls.certresolver=le
