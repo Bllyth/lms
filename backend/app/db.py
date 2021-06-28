@@ -1,17 +1,9 @@
-import databases
-import ormar
 import sqlalchemy
 
+from .base import metadata
 from .config import settings
 
-database = databases.Database(settings.DB_URL)
-metadata = sqlalchemy.MetaData()
-
-
-class BaseMeta(ormar.ModelMeta):
-    metadata = metadata
-    database = database
-
+from auth.models import User
 
 engine = sqlalchemy.create_engine(settings.DB_URL)
 metadata.create_all(engine)

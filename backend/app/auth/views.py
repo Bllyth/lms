@@ -14,4 +14,4 @@ async def login(username: str = Form(...), password: str = Form(...)):
 @auth_router.get('/{user_id}', response_model=User)
 async def get_user(user_id: int):
     user_db = await User.objects.get(id=user_id)
-    return user
+    return user_db
