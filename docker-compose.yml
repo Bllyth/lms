@@ -96,7 +96,7 @@ services:
 #      # Use the TLS Challenge for Let's Encrypt
 #      - --certificatesresolvers.le.acme.tlschallenge=true
       # Use the DNS Challenge for Let's Encrypt
-      -- --certificatesresolvers.cloudflare.acme.dnschallenge=true
+      - --certificatesresolvers.cloudflare.acme.dnschallenge=true
       - --certificatesresolvers.cloudflare.acme.dnschallenge.delaybeforecheck=0
       - --certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare
       - --certificatesresolvers.cloudflare.acme.dnschallenge.resolvers[0]=1.1.1.1:53
