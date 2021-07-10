@@ -1,9 +1,15 @@
-import sqlalchemy
-
-from .base import metadata
+from ormar import ModelMeta
+from sqlalchemy import MetaData
+from databases import Database
 from .config import settings
 
-from .auth.models import User
+# Initialize Database
+DATABASE_URL = settings.DATABASE_URL
+database = Database(DATABASE_URL)
+metadata = MetaData()
 
-engine = sqlalchemy.create_engine(settings.DB_URL)
-metadata.create_all(engine)
+
+# Declare a BaseMeta
+class BaseMeta(ModelMeta):
+    database = database
+    metadata = metadata
