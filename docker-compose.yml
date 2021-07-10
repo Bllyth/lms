@@ -43,7 +43,7 @@ services:
       - 443:443
     restart: always
     environment:
-      - CLOUDFLARE_EMAIL=${CLOUDFLARE_EMAIL?Variable not set}muchiralc@gmail.com
+      - CLOUDFLARE_EMAIL=${CLOUDFLARE_EMAIL?Variable not set}
       - CLOUDFLARE_API_KEY=${CLOUDFLARE_API_KEY?Variable not set}
     labels:
       # Enable Traefik for this service, to make it available in the public network
@@ -57,7 +57,7 @@ services:
       - traefik.docker.network=traefik-public
       # traefik-https the actual router using HTTPS
       - traefik.http.routers.traefik-dashboard-https.entrypoints=https
-      - traefik.http.routers.traefik-dashboard-https.rule=Host(`traefik.blyth.tech`)
+      - traefik.http.routers.traefik-dashboard-https.rule=Host(`${TRAEFIK_DASHBOARD_HOST?Variable not set}`)
       - traefik.http.routers.traefik-dashboard-https.tls=true
       # Use the "le" (Let's Encrypt) resolver created below
       - traefik.http.routers.traefik-dashboard-https.tls.certresolver=le
@@ -87,21 +87,22 @@ services:
       - --entrypoints.http.address=:80
       # Create an entrypoint "https" listening on port 443
       - --entrypoints.https.address=:443
-      - --entrypoints.websecure.http.tls.domains[0].main=${TRAEFIK_BASE_DNS?Variable not set}
-      - --entrypoints.websecure.http.tls.domains[0].sans=*.${TRAEFIK_BASE_DNS?Variable not set}
       # Create the certificate resolver "le" for Let's Encrypt, uses the environment variable EMAIL
       - --certificatesresolvers.le.acme.email=${TRAEFIK_ACME_EMAIL?Variable not set}
+      - --entrypoints.websecure.http.tls.domains[0].main=${TRAEFIK_BASE_DNS?Variable not set}
+      - --entrypoints.websecure.http.tls.domains[0].sans=*.${TRAEFIK_BASE_DNS?Variable not set}
+      # Use the DNS Challenge for Let's Encrypt
+      - --certificatesresolvers.le.acme.dnschallenge=true
+      - --certificatesresolvers.le.acme.dnschallenge.delaybeforecheck=0
+      - --certificatesresolvers.le.acme.dnschallenge.provider=le
+      - --certificatesresolvers.le.acme.dnschallenge.resolvers[0]=1.1.1.1:53
+      - --certificatesresolvers.le.acme.dnschallenge.resolvers[1]=8.8.8.8:53
+      - --certificatesresolvers.le.acme.caServer=${TRAEFIK_ACME_CASERVER?Variable not set}
       # Store the Let's Encrypt certificates in the mounted volume
       - --certificatesresolvers.le.acme.storage=/certificates/acme.json
 #      # Use the TLS Challenge for Let's Encrypt
 #      - --certificatesresolvers.le.acme.tlschallenge=true
-      # Use the DNS Challenge for Let's Encrypt
-      - --certificatesresolvers.cloudflare.acme.dnschallenge=true
-      - --certificatesresolvers.cloudflare.acme.dnschallenge.delaybeforecheck=0
-      - --certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare
-      - --certificatesresolvers.cloudflare.acme.dnschallenge.resolvers[0]=1.1.1.1:53
-      - --certificatesresolvers.cloudflare.acme.dnschallenge.resolvers[1]=8.8.8.8:53
-      - --certificatesresolvers.cloudflare.acme.caServer=${TRAEFIK_ACME_CASERVER?Variable not set}
+
       # Enable the access log, with HTTP requests
       - --accesslog
       # Enable the Traefik log, for configurations and errors
