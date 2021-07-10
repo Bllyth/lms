@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b34caade-a034-477e-a785-096d6faf63fd" name="Default Changelist" comment="Disabled HTTPS">
-      <change beforePath="$PROJECT_DIR$/lms-master/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/lms-master/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <list id="3de8623a-6977-4446-8c82-bb0ff3586e68" name="Revert &quot;Disabled HTTPS&quot;" comment="Revert &quot;Disabled HTTPS&quot;&#10;&#10;This reverts commit e163cb22" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,7 +39,7 @@
       <updated>1625905538230</updated>
       <workItem from="1625905539614" duration="3653000" />
       <workItem from="1625915793825" duration="1679000" />
-      <workItem from="1625917698331" duration="2093000" />
+      <workItem from="1625917698331" duration="2238000" />
     </task>
     <task id="LOCAL-00001" summary="Disabled HTTPS">
       <created>1625908089366</created>
@@ -90,7 +90,21 @@
       <option name="project" value="LOCAL" />
       <updated>1625919533417</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Disabled HTTPS">
+      <created>1625919795642</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1625919795642</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Disabled HTTPS">
+      <created>1625919859729</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1625919859729</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
