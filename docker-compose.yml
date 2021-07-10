@@ -43,8 +43,8 @@ services:
       - 443:443
     restart: always
     environment:
-      - CLOUDFLARE_EMAIL=muchiralc@gmail.com
-      - CLOUDFLARE_API_KEY=9w5NfI5w4n01iOv-be6DF5sfJOAALz3iSSnzYKUv
+      - CLOUDFLARE_EMAIL=${CLOUDFLARE_EMAIL?Variable not set}muchiralc@gmail.com
+      - CLOUDFLARE_API_KEY=${CLOUDFLARE_API_KEY?Variable not set}
     labels:
       # Enable Traefik for this service, to make it available in the public network
       - traefik.enable=true
@@ -52,7 +52,7 @@ services:
       - traefik.http.services.traefik-dashboard.loadbalancer.server.port=8080
       # Make Traefik use this domain in HTTP
       - traefik.http.routers.traefik-dashboard-http.entrypoints=http
-      - traefik.http.routers.traefik-dashboard-http.rule=Host(`traefik.blyth.tech`)
+      - traefik.http.routers.traefik-dashboard-http.rule=Host(`${TRAEFIK_DASHBOARD_HOST?Variable not set}`)
       # Use the traefik-public network (declared below)
       - traefik.docker.network=traefik-public
       # traefik-https the actual router using HTTPS
@@ -87,16 +87,21 @@ services:
       - --entrypoints.http.address=:80
       # Create an entrypoint "https" listening on port 443
       - --entrypoints.https.address=:443
+      - --entrypoints.websecure.http.tls.domains[0].main=${TRAEFIK_BASE_DNS?Variable not set}
+      - --entrypoints.websecure.http.tls.domains[0].sans=*.${TRAEFIK_BASE_DNS?Variable not set}
       # Create the certificate resolver "le" for Let's Encrypt, uses the environment variable EMAIL
-      - --certificatesresolvers.le.acme.email=muchiralc@gmail.com
+      - --certificatesresolvers.le.acme.email=${TRAEFIK_ACME_EMAIL?Variable not set}
       # Store the Let's Encrypt certificates in the mounted volume
       - --certificatesresolvers.le.acme.storage=/certificates/acme.json
 #      # Use the TLS Challenge for Let's Encrypt
 #      - --certificatesresolvers.le.acme.tlschallenge=true
-      # Use the HTTP Challenge for Let's Encrypt
-      - --certificatesresolvers.le.acme.httpchallenge=true
-      - --certificatesresolvers.le.acme.httpchallenge.entrypoint=web
-      - --certificatesresolvers.le.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+      # Use the DNS Challenge for Let's Encrypt
+      -- --certificatesresolvers.cloudflare.acme.dnschallenge=true
+      - --certificatesresolvers.cloudflare.acme.dnschallenge.delaybeforecheck=0
+      - --certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare
+      - --certificatesresolvers.cloudflare.acme.dnschallenge.resolvers[0]=1.1.1.1:53
+      - --certificatesresolvers.cloudflare.acme.dnschallenge.resolvers[1]=8.8.8.8:53
+      - --certificatesresolvers.cloudflare.acme.caServer=${TRAEFIK_ACME_CASERVER?Variable not set}
       # Enable the access log, with HTTP requests
       - --accesslog
       # Enable the Traefik log, for configurations and errors
@@ -164,12 +169,12 @@ services:
       - traefik.http.services.app.loadbalancer.server.port=80
       # Make Traefik use this domain in HTTP
       - traefik.http.routers.app-http.entrypoints=http
-      - traefik.http.routers.app-http.rule=Host(`blyth.tech`)
+      - traefik.http.routers.app-http.rule=Host(`${TRAEFIK_BASE_DNS?Variable not set}`)
       # Use the traefik-public network (declared below)
       - traefik.docker.network=traefik-public
       # Make Traefik use this domain in HTTPS
       - traefik.http.routers.app-https.entrypoints=https
-      - traefik.http.routers.app-https.rule=Host(`blyth.tech`)
+      - traefik.http.routers.app-https.rule=Host(`${TRAEFIK_BASE_DNS?Variable not set}`)
       - traefik.http.routers.app-https.tls=true
       # Use the "le" (Let's Encrypt) resolver
       - traefik.http.routers.app-https.tls.certresolver=le
