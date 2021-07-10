@@ -89,9 +89,9 @@ services:
       - --entrypoints.https.address=:443
       # Create the certificate resolver "le" for Let's Encrypt, uses the environment variable EMAIL
       - --certificatesresolvers.le.acme.email=${TRAEFIK_ACME_EMAIL?Variable not set}
-      - --entrypoints.websecure.http.tls.domains[0].main=${TRAEFIK_BASE_DNS?Variable not set}
-      - --entrypoints.websecure.http.tls.domains[0].sans=*.${TRAEFIK_BASE_DNS?Variable not set}
-      # Use the DNS Challenge for Let's Encrypt
+      - --entrypoints.https.http.tls.domains[0].main=${TRAEFIK_BASE_DNS?Variable not set}
+      - --entrypoints.https.http.tls.domains[0].sans=*.${TRAEFIK_BASE_DNS?Variable not set}
+      # Use the DNS Challenge for Let's Encrypt Cloudflare
       - --certificatesresolvers.le.acme.dnschallenge=true
       - --certificatesresolvers.le.acme.dnschallenge.delaybeforecheck=0
       - --certificatesresolvers.le.acme.dnschallenge.provider=cloudflare
