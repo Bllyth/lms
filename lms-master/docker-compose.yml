@@ -93,6 +93,7 @@ services:
       # Use the HTTP Challenge for Let's Encrypt
       - --certificatesresolvers.le.acme.tlschallenge=true
 #      - --certificatesresolvers.le.acme.httpchallenge.entrypoint=web
+#      -
       - --certificatesresolvers.le.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
       # Enable the access log, with HTTP requests
       - --accesslog
