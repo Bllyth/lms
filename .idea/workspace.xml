@@ -39,7 +39,7 @@
       <updated>1625905538230</updated>
       <workItem from="1625905539614" duration="3653000" />
       <workItem from="1625915793825" duration="1679000" />
-      <workItem from="1625917698331" duration="1685000" />
+      <workItem from="1625917698331" duration="1828000" />
     </task>
     <task id="LOCAL-00001" summary="Disabled HTTPS">
       <created>1625908089366</created>
@@ -76,7 +76,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625919301274</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Disabled HTTPS">
+      <created>1625919391864</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1625919391864</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
