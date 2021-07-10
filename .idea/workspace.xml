@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b34caade-a034-477e-a785-096d6faf63fd" name="Default Changelist" comment="Enabled HTTPS">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
@@ -45,7 +46,7 @@
       <updated>1625905538230</updated>
       <workItem from="1625905539614" duration="3653000" />
       <workItem from="1625915793825" duration="1679000" />
-      <workItem from="1625917698331" duration="8963000" />
+      <workItem from="1625917698331" duration="10085000" />
     </task>
     <task id="LOCAL-00001" summary="Disabled HTTPS">
       <created>1625908089366</created>
@@ -187,7 +188,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625933968047</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Enabled HTTPS">
+      <created>1625934346619</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1625934346619</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
