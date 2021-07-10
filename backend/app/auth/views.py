@@ -1,3 +1,5 @@
+from typing import List
+
 from fastapi import APIRouter, Form
 
 from .models import User
@@ -15,6 +17,12 @@ async def login(username: str = Form(...), password: str = Form(...)):
 async def add_user(user: User):
     await user.save()
     return user
+
+
+@user_router.get('/users', response_model=List[User])
+async def get_users():
+    users = await User.objects.all()
+    return users
 
 
 @user_router.get('/{user_id}', response_model=User)
