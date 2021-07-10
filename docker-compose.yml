@@ -42,6 +42,9 @@ services:
       # Listen on port 443, default for HTTPS
       - 443:443
     restart: always
+    environment:
+      - CLOUDFLARE_EMAIL=muchiralc@gmail.com
+      - CLOUDFLARE_API_KEY=9w5NfI5w4n01iOv-be6DF5sfJOAALz3iSSnzYKUv
     labels:
       # Enable Traefik for this service, to make it available in the public network
       - traefik.enable=true
@@ -91,8 +94,8 @@ services:
 #      # Use the TLS Challenge for Let's Encrypt
 #      - --certificatesresolvers.le.acme.tlschallenge=true
       # Use the HTTP Challenge for Let's Encrypt
-      - --certificatesresolvers.le.acme.tlschallenge=true
-#      - --certificatesresolvers.le.acme.httpchallenge.entrypoint=web
+      - --certificatesresolvers.le.acme.httphallenge=true
+      - --certificatesresolvers.le.acme.httpchallenge.entrypoint=web
       - --certificatesresolvers.le.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
       # Enable the access log, with HTTP requests
       - --accesslog
