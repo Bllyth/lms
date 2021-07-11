@@ -15,7 +15,7 @@ async def login(user_details: AuthModel):
         user = await User.objects.get(username=user_details.username)
         password = await User.objects.get(password=user_details.password)
         if user and password:
-            return user
+            return user.dict(exclude={'password'})
     except NoMatch:
         raise HTTPException(status_code=400, detail="Invalid username or password")
 
