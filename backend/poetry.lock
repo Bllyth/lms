@@ -175,6 +175,7 @@ optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
+cryptography = {version = "*", optional = true, markers = "extra == \"crypto\""}
 databases = ">=0.3.2,<0.4.4"
 pydantic = ">=1.6.1,<1.7 || >1.7,<1.7.1 || >1.7.1,<1.7.2 || >1.7.2,<1.7.3 || >1.7.3,<1.8 || >1.8,<1.8.1 || >1.8.1,<=1.8.2"
 sqlalchemy = ">=1.3.18,<=1.3.23"
@@ -377,7 +378,7 @@ standard = ["websockets (>=9.1)", "httptools (>=0.2.0,<0.3.0)", "watchgod (>=0.6
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "3995680cc5310901ba0f3d7d3f663a55238fb4cebb7bb8cef4d7b65276febaf2"
+content-hash = "bfe79b50716a334f9b42f9215dd64eb20a24d4cd18853fa8cbc8c4920d0b3633"
 
 [metadata.files]
 alembic = [

@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
 from jose import jwt
-from ormar import Model, Integer, String, Boolean
+from ormar import Model, Integer, String, Boolean, EncryptBackends
 from passlib.context import CryptContext
 from pydantic import BaseModel
 
@@ -28,7 +28,8 @@ class User(Model):
     name: str = String(max_length=200, nullable=False)
     username: str = String(unique=True, max_length=128, nullable=False)
     email: str = String(max_length=128, unique=True, nullable=False)
-    password: str = String(max_length=128, nullable=False)
+    password: str = String(max_length=128, nullable=False, encrypt_secret='fer45jhgW',
+                           encrypt_backend=EncryptBackends.HASH)
     id_no: str = Integer(unique=True)
     phone_no: int = Integer(unique=True, nullable=False)
     active: bool = Boolean(default=True, nullable=False)
