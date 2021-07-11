@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import APIRouter, Form
+from fastapi import APIRouter, Form, HTTPException
 
 from .models import User
 
@@ -10,6 +10,9 @@ user_router = APIRouter()
 
 @auth_router.post('/login')
 async def login(username: str = Form(...), password: str = Form(...)):
+    user = User.objects.get(username=username)
+    if not user:
+        raise HTTPException(status_code=400, detail="Invalid username or password")
     return {"username": username}
 
 

@@ -11,6 +11,11 @@ from ..db import BaseMeta
 pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 
 
+class AuthModel(BaseModel):
+    username: str
+    password: str
+
+
 class Token(BaseModel):
     access_token: str
     token_type: str
