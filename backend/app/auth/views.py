@@ -2,15 +2,15 @@ from typing import List
 
 from fastapi import APIRouter, Form, HTTPException
 
-from .models import User
+from .models import User, AuthModel
 
 auth_router = APIRouter()
 user_router = APIRouter()
 
 
 @auth_router.post('/login')
-async def login(username: str = Form(...), password: str = Form(...)):
-    user = User.objects.get(username=username)
+async def login(user_details: AuthModel):
+    user = User.objects.get(username=user_details.username)
     if user:
         return user
     raise HTTPException(status_code=400, detail="Invalid username or password")
