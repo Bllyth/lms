@@ -19,7 +19,7 @@ async def add_user(user: User):
     return user
 
 
-@user_router.get('/users', response_model=List[User])
+@user_router.get('/', response_model=List[User])
 async def get_users():
     users = await User.objects.all()
     return users
