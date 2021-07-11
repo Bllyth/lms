@@ -1,6 +1,7 @@
 from typing import List
 
 from fastapi import APIRouter, Form, HTTPException
+from ormar import NoMatch
 
 from .models import User, AuthModel
 
@@ -10,11 +11,12 @@ user_router = APIRouter()
 
 @auth_router.post('/login')
 async def login(user_details: AuthModel):
-    user = await User.objects.get(username=user_details.username)
-    password = await User.objects.get(password=user_details.password)
-    if user and password:
-        return user
-    else:
+    try:
+        user = await User.objects.get(username=user_details.username)
+        password = await User.objects.get(password=user_details.password)
+        if user and password:
+            return user
+    except NoMatch:
         raise HTTPException(status_code=400, detail="Invalid username or password")
 
 
