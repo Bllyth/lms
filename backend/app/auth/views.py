@@ -12,7 +12,7 @@ user_router = APIRouter()
 async def login(username: str = Form(...), password: str = Form(...)):
     user = User.objects.get(username=username)
     if user:
-        return {"username": username}
+        return user
     raise HTTPException(status_code=400, detail="Invalid username or password")
 
 
