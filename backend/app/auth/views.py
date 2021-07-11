@@ -11,9 +11,11 @@ user_router = APIRouter()
 @auth_router.post('/login')
 async def login(user_details: AuthModel):
     user = await User.objects.get(username=user_details.username)
-    if user and user.check_password(user_details.password):
+    password = await User.objects.get(password=user_details.password)
+    if user and password:
         return user
-    raise HTTPException(status_code=400, detail="Invalid username or password")
+    else:
+        raise HTTPException(status_code=400, detail="Invalid username or password")
 
 
 @user_router.post('/add_user', response_model=User)

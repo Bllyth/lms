@@ -39,7 +39,7 @@ class User(Model):
     phone_no: int = Integer(unique=True, nullable=False)
     active: bool = Boolean(default=True, nullable=False)
 
-    def check_password(self, password: str) -> bool:
+    def check_password(self, password: str):
         return pwd_context.verify(password, self.password)
 
     @property
